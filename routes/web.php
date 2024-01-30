@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[dashboardController::class,'index'])->name('dashboard');
 
-
-route::get('/dashboard',[dashboardController::class ,'index'])->name('feed');
-
-route::get('/profile',[profileController::class ,'index'])->name('userProfile');
+Route::get('/terms',function(){return view('terms');})->name('terms');
