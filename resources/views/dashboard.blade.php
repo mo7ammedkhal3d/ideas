@@ -14,6 +14,9 @@
                         @include('shared.ideaCard')
                     </div>
                 @endforeach
+                <div class="mt-4">
+                    {{$ideas->links()}}
+                </div>
             </div>
             <div class="col-3">
                 @include('shared.searchSection')

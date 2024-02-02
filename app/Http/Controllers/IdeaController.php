@@ -9,6 +9,14 @@ class IdeaController extends Controller
 {
     public function store()
     {
+        request()->validate([
+            'idea-content'=>'required|min:8|max:240'
+        ],[
+            'idea-content.required'=>'You missing enter idea to post ?!!! 😒',
+            'idea-content.min'=>'The idea at leat must contain 8 charachters 😊🥸',
+            'idea-conent.max'=>'The idea text is too long 😐 please enter less charachetrs'
+        ]);
+
         $idea = idea::create(['content' => request()->get('idea-content')]);
 
         return redirect()
