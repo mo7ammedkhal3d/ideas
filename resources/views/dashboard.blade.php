@@ -6,7 +6,7 @@
                 @include('shared.sideLinkes')
             </div>
             <div class="col-6">
-
+                @include('shared.successMessage')
                 @include('shared.submitIdea')
                 <hr>
                 @foreach ($ideas as $idea)

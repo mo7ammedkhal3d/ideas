@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\profilecontroller;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[dashboardController::class,'index'])->name('dashboard');
+Route::get('/', [dashboardController::class, 'index'])->name('idea.index');
 
-Route::get('/terms',function(){return view('terms');})->name('terms');
+Route::post('/idea', [IdeaController::class, 'store'])->name('idea.create');
+
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
