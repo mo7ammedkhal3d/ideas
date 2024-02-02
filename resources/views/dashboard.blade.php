@@ -1,19 +1,3 @@
-{{-- bootstrp-twitter-clone-template --}}
-
-
-{{-- download it --}}
-{{-- learn formated --}}
-{{-- make layout folder with two foiles one for glaypout and one for nav file --}}
-{{-- make terms view nd dashboard view  --}}
-{{-- make name of the app and repalce in brand and titile nnd make rooute  --}}
-
-
-{{-- deal with database  --}}
-{{-- mysql -u root; --}}
-{{-- create database ideasdb --}}
-{{-- run php artisan migrate --}}
-{{-- use odeasdb and then run the dirst and make show tables --}}
-
 @extends('layouts.layout')
 @section('content')
     <div class="container py-4">
@@ -35,7 +19,7 @@
                                     <span>Feed</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('terms')}}">
+                                <a class="nav-link" href="{{ route('terms') }}">
                                     <span>Terms</span></a>
                             </li>
                             <li class="nav-item">
@@ -111,6 +95,7 @@
                                 <div class="d-flex align-items-start">
                                     <img style="width:35px" class="me-2 avatar-sm rounded-circle"
                                         src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Luigi" alt="Luigi Avatar">
+
                                     <div class="w-100">
                                         <div class="d-flex justify-content-between">
                                             <h6 class="">Luigi
@@ -128,6 +113,29 @@
                                         </p>
                                     </div>
                                 </div>
+                                @foreach ($ideas as $idea)
+                                    <hr>
+                                    <div class="d-flex align-items-start">
+                                        <img style="width:35px" class="me-2 avatar-sm rounded-circle"
+                                            src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Luigi" alt="Luigi Avatar">
+
+                                        <div class="w-100">
+                                            <div class="d-flex justify-content-between">
+                                                <h6 class="">Luigi
+                                                </h6>
+                                                <small class="fs-6 fw-light text-muted">
+                                                    <script>
+                                                        var postedDate = "{{ $idea->created_at }}";
+                                                        document.write(moment(postedDate).fromNow());
+                                                    </script>
+                                                </small>
+                                            </div>
+                                            <p class="fs-6 mt-3 fw-light">
+                                                {{ $idea->content }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
