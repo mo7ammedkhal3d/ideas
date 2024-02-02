@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class dashboardController extends Controller
 {
-    public function index(){
-        return view('dashboard',['ideas'=>idea::all()]);
+    public function index()
+    {
+        return view('dashboard', ['ideas' => idea::orderBy('created_at', 'DESC')->get()]);
     }
 }
