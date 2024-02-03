@@ -9,6 +9,16 @@
                         </a></h5>
                 </div>
             </div>
+            <div class="d-flex gap-4 flex-row">
+                <a href="{{route('idea.show',$idea->id)}}"><span class="material-symbols-sharp">
+                    preview
+                    </span></a>
+                <form action="{{ route('idea.destroy', $idea->id) }}" method="POST">
+                    @method('delete')
+                    @csrf
+                    <button type="submit" class="btn btn-danger btn-sm">X</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="card-body">
