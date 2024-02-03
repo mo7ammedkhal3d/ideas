@@ -11,16 +11,16 @@ class IdeaController extends Controller
     {
         request()->validate(
             [
-                'idea-content' => 'required|min:8|max:240',
+                'content' => 'required|min:8|max:240',
             ],
             [
-                'idea-content.required' => 'You missing enter idea to post ?!!! 😒',
-                'idea-content.min' => 'The idea at leat must contain 8 charachters 😊🥸',
-                'idea-conent.max' => 'The idea text is too long 😐 please enter less charachetrs',
+                'content.required' => 'You missing enter idea to post ?!!! 😒',
+                'content.min' => 'The idea at leat must contain 8 charachters 😊🥸',
+                'content.max' => 'The idea text is too long 😐 please enter less charachetrs',
             ],
         );
 
-        $idea = idea::create(['content' => request()->get('idea-content')]);
+        $idea = idea::create(['content' => request()->get('content')]);
 
         return redirect()
             ->route('idea.index')
@@ -29,7 +29,34 @@ class IdeaController extends Controller
 
     public function show(Idea $idea)
     {
-        return view('ideas.show', ['idea' => $idea]);
+        return view('ideas.show', compact('idea'));
+    }
+
+    public function edit(Idea $idea)
+    {
+        $editing = true;
+
+        return view('ideas.show', compact('editing', 'idea'));
+    }
+
+    public function update(idea $idea)
+    {
+        request()->validate(
+            [
+                'content' => 'required|min:8|max:240',
+            ],
+            [
+                'content.required' => 'You missing enter idea to post ?!!! 😒',
+                'content.min' => 'The idea at leat must contain 8 charachters 😊🥸',
+                'content.max' => 'The idea text is too long 😐 please enter less charachetrs',
+            ],
+        );
+
+        $idea->content = request()->get('content', '');
+        $idea->save();
+        return redirect()
+            ->route('idea.show',$idea->id)
+            ->with('success', 'idea is updeated successfully');
     }
 
     public function destroy(idea $idae)

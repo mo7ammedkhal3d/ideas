@@ -9,9 +9,12 @@
                         </a></h5>
                 </div>
             </div>
-            <div class="d-flex gap-4 flex-row">
-                <a href="{{route('idea.show',$idea->id)}}"><span class="material-symbols-sharp">
-                    preview
+            <div class="d-flex gap-2 flex-row">
+                <a href="{{ route('idea.edit', $idea->id) }}"><span class="material-symbols-outlined">
+                        edit_note
+                    </span></a>
+                <a href="{{ route('idea.show', $idea->id) }}"><span class="material-symbols-sharp">
+                        preview
                     </span></a>
                 <form action="{{ route('idea.destroy', $idea->id) }}" method="POST">
                     @method('delete')
@@ -22,9 +25,25 @@
         </div>
     </div>
     <div class="card-body">
-        <p class="fs-6 fw-light text-muted">
-            {{ $idea->content }}
-        </p>
+        @if ($editing ?? false)
+            <form action="{{ route('idea.update', $idea->id) }}" method="POST">
+                @csrf
+                @method('put')
+                <div class="mb-3">
+                    <textarea name="content" class="form-control" id="content" rows="3">{{ $idea->content }}</textarea>
+                    @error('content')
+                        <span class="fs-6 d-block text-danger"> {{ $message }} </span>
+                    @enderror
+                </div>
+                <div class="">
+                    <button type="submit" class="btn btn-dark btn-sm"> Update </button>
+                </div>
+            </form>
+        @else
+            <p class="fs-6 fw-light text-muted">
+                {{ $idea->content }}
+            </p>
+        @endif
         <div class="d-flex justify-content-between">
             <div>
                 <a href="#" class="fw-light nav-link fs-6"> <span class="fas fa-heart me-1">
