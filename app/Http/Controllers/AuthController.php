@@ -14,6 +14,11 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+    public function login()
+    {
+        return view('auth.login');
+    }
+
     public function store()
     {
         $validated = request()->validate(
@@ -45,5 +50,49 @@ class AuthController extends Controller
         return redirect()
             ->route('idea.index')
             ->with('success', 'Account created successfully !!');
+    }
+
+    public function authenticate()
+    {
+        $validated = request()->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required',
+            ],
+            [
+                'email.required' => 'please enter your email here 😊',
+                'password.required' => 'please enter your password here 😊',
+                'password.confirmed' => 'this password and confirmed password not mathched',
+            ],
+        );
+
+        if (auth()->attempt($validated)) {
+            request()
+                ->session()
+                ->regenerate();
+            return redirect()
+                ->route('idea.index')
+                ->with('success', 'Login successfully!');
+        }
+
+        return redirect()
+            ->route('login')
+            ->withErrors(['email' => 'email not matching emails with provide email and password']);
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+
+        request()
+            ->session()
+            ->invalidate();
+        request()
+            ->session()
+            ->regenerateToken();
+
+        return redirect()
+            ->route('idea.index')
+            ->with('success', 'Logout successfuly!!');
     }
 }

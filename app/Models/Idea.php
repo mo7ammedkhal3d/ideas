@@ -10,8 +10,6 @@ class Idea extends Model
 {
     use HasFactory;
 
-    // protected $guarded =['id','created_at'];
-
     protected $fillable = ['content', 'likes', 'user_id'];
 
     public function user()

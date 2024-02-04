@@ -9,15 +9,32 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('register')}}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/profile">Profile</a>
-                    </li>
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        </li>
+                    @endguest
+                    @auth
+                        <li class="nav-item">
+                            <div class="d-flex gap-2">
+                                <div class="d-flex gap-1">
+                                    <img src="{{ 'https://www.gravatar.com/avatar/' . md5(strtolower(trim(Auth::user()->email))) . '?d=mp' }}"
+                                        alt="Profile" class="rounded-circle" style="height:3rem">
+                                    <a class="nav-link" href="#"> {{ Auth::user()->name }} </a>
+                                </div>
+                                <div class="d-flex align-items-center justify-contnet-center">
+                                    <form action="logout" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-info"
+                                            href="{{ route('logout') }}">Logout</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
