@@ -9,7 +9,7 @@ class IdeaController extends Controller
 {
     public function store()
     {
-        request()->validate(
+        $validated = request()->validate(
             [
                 'content' => 'required|min:8|max:240',
             ],
@@ -20,8 +20,7 @@ class IdeaController extends Controller
             ],
         );
 
-        $idea = Idea::create(request()->all());
-        // $idea = Idea::create(['content' => request()->get('content'), 'user_id' => 1]);
+        Idea::create(['content' => $validated['content'], 'user_id' => 1]);
 
         return redirect()
             ->route('idea.index')
@@ -42,7 +41,7 @@ class IdeaController extends Controller
 
     public function update(idea $idea)
     {
-        request()->validate(
+        $validated = request()->validate(
             [
                 'content' => 'required|min:8|max:240',
             ],
@@ -53,8 +52,8 @@ class IdeaController extends Controller
             ],
         );
 
-        $idea->content = request()->get('content', '');
-        $idea->save();
+        $idea->update($validated);
+
         return redirect()
             ->route('idea.show', $idea->id)
             ->with('success', 'idea is updeated successfully');
