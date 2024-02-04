@@ -12,7 +12,7 @@
         </div>
     </form>
     <hr>
-    @foreach ($idea->comments as $comment)
+    @foreach ($idea->comments->sortBy('created_at') as $comment)
         <div class="d-flex align-items-start mb-3 idea-comments">
             <img style="width:35px" class="me-2 avatar-sm rounded-circle"
                 src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Luigi" alt="Luigi Avatar">

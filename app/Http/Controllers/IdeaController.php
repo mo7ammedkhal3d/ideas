@@ -20,7 +20,8 @@ class IdeaController extends Controller
             ],
         );
 
-        $idea = Idea::create(['content' => request()->get('content'), 'user_id' => 1]);
+        $idea = Idea::create(request()->all());
+        // $idea = Idea::create(['content' => request()->get('content'), 'user_id' => 1]);
 
         return redirect()
             ->route('idea.index')
