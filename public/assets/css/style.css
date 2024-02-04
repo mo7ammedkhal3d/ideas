@@ -1,0 +1,13 @@
+:root{
+--primary-color:#e7e7e7;
+--secondry-color:#eee
+}
+
+/* General */
+
+
+/* General */
+
+.idea-comments:not(:last-child){
+    border-bottom: 1px solid gray;
+}

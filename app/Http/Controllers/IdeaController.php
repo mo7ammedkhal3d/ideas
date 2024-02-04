@@ -14,17 +14,17 @@ class IdeaController extends Controller
                 'content' => 'required|min:8|max:240',
             ],
             [
-                'content.required' => 'You missing enter idea to post ?!!! 😒',
-                'content.min' => 'The idea at leat must contain 8 charachters 😊🥸',
-                'content.max' => 'The idea text is too long 😐 please enter less charachetrs',
+                'content.required' => 'You are missing to enter an idea to post! 😒',
+                'content.min' => 'The idea must contain at least 8 characters! 😊🥸',
+                'content.max' => 'The idea text is too long! 😐 Please enter fewer characters.',
             ],
         );
 
-        $idea = idea::create(['content' => request()->get('content')]);
+        $idea = Idea::create(['content' => request()->get('content'), 'user_id' => 1]);
 
         return redirect()
             ->route('idea.index')
-            ->with('success', 'Idea was created successuflly');
+            ->with('success', 'Idea was created successfully');
     }
 
     public function show(Idea $idea)
@@ -55,7 +55,7 @@ class IdeaController extends Controller
         $idea->content = request()->get('content', '');
         $idea->save();
         return redirect()
-            ->route('idea.show',$idea->id)
+            ->route('idea.show', $idea->id)
             ->with('success', 'idea is updeated successfully');
     }
 
