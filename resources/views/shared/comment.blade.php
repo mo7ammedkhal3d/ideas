@@ -13,12 +13,13 @@
     </form>
     <hr>
     @foreach ($idea->comments->sortByDesc('created_at') as $comment)
-        <div class="d-flex align-items-start mb-3 idea-comments">
+        <div class="d-flex align-items-start mb-3 idea-comments gap-2">
             <img style="width:35px" class="me-2 avatar-sm rounded-circle"
-                src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Luigi" alt="Luigi Avatar">
+                src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $idea->user->name }}"
+                alt="{{ $idea->user->name }}">
             <div class="w-100">
                 <div class="d-flex justify-content-between">
-                    <h6 class="">Luigi
+                    <h6 class="">{{ $idea->user->name }}
                     </h6>
                     <small class="fs-6 fw-light text-muted">
                         <script>

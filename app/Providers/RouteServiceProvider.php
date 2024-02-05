@@ -33,8 +33,9 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+            Route::middleware('web')->group(base_path('routes/web.php')); // also you can add your new file routes here by add this code fter ->->group(base_path('routes/auth.php')) but when ou add this in seperate it's much cleaner and you can add aditional properties
+
+            Route::middleware('web')->group(base_path('routes/auth.php'));
         });
     }
 }

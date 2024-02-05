@@ -3,19 +3,20 @@
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
+                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $idea->user->name }}"
+                    alt="{{ $idea->user->name }}">
                 <div>
-                    <h5 class="card-title mb-0"><a href="#"> Mario
+                    <h5 class="card-title mb-0"><a href="#"> {{ $idea->user->name }}
                         </a></h5>
                 </div>
             </div>
-            <div class="d-flex gap-2 flex-row">
-                <a href="{{ route('idea.edit', $idea->id) }}"><span class="material-symbols-outlined">
-                        edit_note
-                    </span></a>
-                <a href="{{ route('idea.show', $idea->id) }}"><span class="material-symbols-sharp">
-                        preview
-                    </span></a>
+            <div class="d-flex gap-2 flex-row align-items-center">
+                @auth
+                    @if (Auth::user()->id == $idea->user_id)
+                        <a href="{{ route('idea.edit', $idea->id) }}"><i class="fas fa-edit fs-3 text-info"></i></a>
+                    @endif
+                    <a href="{{ route('idea.show', $idea->id) }}"><i class="fas fa-info-circle fs-3 text-success"></i></a>
+                @endauth
                 <form action="{{ route('idea.destroy', $idea->id) }}" method="POST">
                     @method('delete')
                     @csrf
