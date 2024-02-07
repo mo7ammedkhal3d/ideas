@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\profilecontroller;
 use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
@@ -53,6 +54,10 @@ Route::resource('ideas.comments',CommentController::class)->only('store')->middl
 Route::resource('users',UserController::class)->middleware('auth');
 
 Route::get('profile',[UserController::class, 'profile'])->name('profile')->middleware('auth');
+
+Route::post('users/{user}/follow',[FollowerController::class,'follow'])->name('users.follow')->middleware('auth');
+
+Route::post('users/{user}/unfollow',[FollowerController::class,'unfollow'])->name('users.unfollow')->middleware('auth');
 
 Route::get('/terms', function () {
     return view('terms');
