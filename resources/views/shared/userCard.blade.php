@@ -2,7 +2,7 @@
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-4">
-                <img src="{{ 'https://www.gravatar.com/avatar/' . md5(strtolower(trim(Auth::user()->email))) . '?d=mp' }}"
+                <img src="{{$user->getImageUrl()}}"
                     alt="Profile" class="rounded-circle" style="height:3rem">
                 <div>
                     <h3 class="card-title mb-0"><a href="#"> {{ $user->name }}

@@ -14,15 +14,15 @@
     <hr>
     @foreach ($idea->comments->sortByDesc('created_at') as $comment)
         <div class="d-flex align-items-start mb-3 idea-comments gap-2">
-            <img src="{{ 'https://www.gravatar.com/avatar/' . md5(strtolower(trim(Auth::user()->email))) . '?d=mp' }}"
-                alt="Profile" class="rounded-circle" style="height:3rem">
+            <img src="{{ $comment->user->getImageUrl() }}" alt="Profile" class="rounded-circle" style="height:3rem">
             <div class="w-100">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-end">
                     </a></h5>
                     <small class="fs-6 fw-light text-muted">
                         <script>
                             var postedDate = "{{ $comment->created_at }}";
-                            document.write(moment(postedDate).fromNow());
+                            var adjustedDate = moment(postedDate).add(3, 'hours');
+                            document.write(adjustedDate.fromNow());
                         </script>
                     </small>
                 </div>

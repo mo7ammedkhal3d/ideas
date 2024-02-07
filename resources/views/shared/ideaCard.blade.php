@@ -2,10 +2,10 @@
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-3">
-                <img src="{{ 'https://www.gravatar.com/avatar/' . md5(strtolower(trim(Auth::user()->email))) . '?d=mp' }}"
-                alt="Profile" class="rounded-circle" style="height:3rem">
+                <img src="{{ $idea->user->getImageUrl() }}" alt="Profile" class="rounded-circle" style="height:3rem">
                 <div>
-                    <h5 class="card-title mb-0"><a href="{{route('users.show',$idea->user->id)}}"> {{ $idea->user->name }}
+                    <h5 class="card-title mb-0"><a href="{{ route('users.show', $idea->user->id) }}">
+                            {{ $idea->user->name }}
                         </a></h5>
                 </div>
             </div>
@@ -55,7 +55,8 @@
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
                     <script>
                         var postedDate = "{{ $idea->created_at }}";
-                        document.write(moment(postedDate).fromNow());
+                        var adjustedDate = moment(postedDate).add(3, 'hours');
+                        document.write(adjustedDate.fromNow());
                     </script>
                 </span>
             </div>

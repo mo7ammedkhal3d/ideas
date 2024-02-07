@@ -21,7 +21,7 @@
                         <li class="nav-item">
                             <div class="d-flex gap-2">
                                 <div class="d-flex gap-1">
-                                    <img src="{{ 'https://www.gravatar.com/avatar/' . md5(strtolower(trim(Auth::user()->email))) . '?d=mp' }}"
+                                    <img src="{{$user->getImageUrl()}}"
                                         alt="Profile" class="rounded-circle" style="height:3rem">
                                     <a class="nav-link" href="{{route('profile')}}" > {{ Auth::user()->name }} </a>
                                 </div>

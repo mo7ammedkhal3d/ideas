@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'email', 'password','bio','image'];
+    protected $fillable = ['name', 'email', 'password', 'bio', 'image'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,5 +44,14 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class)->latest();
+    }
+
+    public function getImageUrl()
+    {
+        if ($this->image) {
+            return url('storage/' . $this->image);
+        } else {
+            return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email))) . '?d=mp';
+        }
     }
 }
