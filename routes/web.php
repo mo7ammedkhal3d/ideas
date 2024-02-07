@@ -5,6 +5,7 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\profilecontroller;
+use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -19,27 +20,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [dashboardController::class, 'index'])->name('idea.index');
+Route::get('/', [dashboardController::class, 'index'])->name('ideas.index');
 
-Route::group(['prefix' => 'idea/', 'as' => 'idea.', 'middleware' => 'auth'], function () {
-    Route::get('{idea}', [IdeaController::class, 'show'])
-        ->name('show')
-        ->withoutMiddleware('auth');
+Route::group(['prefix' => 'ideas/', 'as' => 'ideas.', 'middleware' => 'auth'], function () {
+    //     Route::get('{idea}', [IdeaController::class, 'show'])
+    //         ->name('show')
+    //         ->withoutMiddleware('auth');
 
-    Route::get('{idea}/edit', [IdeaController::class, 'edit'])->name('edit');
+    //     Route::get('{idea}/edit', [IdeaController::class, 'edit'])->name('edit');
 
-    Route::put('{idea}', [IdeaController::class, 'update'])->name('update');
+    //     Route::put('{idea}', [IdeaController::class, 'update'])->name('update');
 
-    Route::post('idea', [IdeaController::class, 'store'])
-        ->name('store')
-        ->withoutMiddleware('auth');
+    //     Route::post('idea', [IdeaController::class, 'store'])
+    //         ->name('store')
+    //         ->withoutMiddleware('auth');
 
-    Route::group(['middleware' => 'auth'], function () {
-        Route::delete('{idae}', [IdeaController::class, 'destroy'])->name('destroy');
+    // Route::group(['middleware' => 'auth'], function () {
+    //     //     Route::delete('{idae}', [IdeaController::class, 'destroy'])->name('destroy');
 
-        Route::post('{idea}/comments', [commentController::class, 'store'])->name('comments.store');
-    });
+    //     Route::post('{idea}/comments', [commentController::class, 'store'])->name('comments.store');
+    // });
 });
+
+Route::resource('ideas', IdeaController::class)
+    ->except(['index', 'create', 'show'])
+    ->middleware('auth');
+
+Route::resource('ideas', IdeaController::class)->only(['show']); // we do this where we need to detrmine show without auth middleware this two lines of code is replaed than the alot of lines in above
+
+Route::resource('ideas.comments',CommentController::class)->only('store')->middleware('auth'); // this line is the replaced of the above line of code for comments
+
+Route::resource('users',UserController::class)->middleware('auth');
+
+Route::get('profile',[UserController::class, 'profile'])->name('profile')->middleware('auth');
 
 Route::get('/terms', function () {
     return view('terms');

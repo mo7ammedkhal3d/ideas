@@ -1,5 +1,5 @@
 <div>
-    <form action="{{ route('idea.comments.store', $idea->id) }}" method="POST">
+    <form action="{{ route('ideas.comments.store', $idea->id) }}" method="POST">
         @csrf
         <div class="mb-3">
             <textarea name="comment-text" class="fs-6 form-control" rows="1"></textarea>
@@ -14,13 +14,11 @@
     <hr>
     @foreach ($idea->comments->sortByDesc('created_at') as $comment)
         <div class="d-flex align-items-start mb-3 idea-comments gap-2">
-            <img style="width:35px" class="me-2 avatar-sm rounded-circle"
-                src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $idea->user->name }}"
-                alt="{{ $idea->user->name }}">
+            <img src="{{ 'https://www.gravatar.com/avatar/' . md5(strtolower(trim(Auth::user()->email))) . '?d=mp' }}"
+                alt="Profile" class="rounded-circle" style="height:3rem">
             <div class="w-100">
                 <div class="d-flex justify-content-between">
-                    <h6 class="">{{ $idea->user->name }}
-                    </h6>
+                    </a></h5>
                     <small class="fs-6 fw-light text-muted">
                         <script>
                             var postedDate = "{{ $comment->created_at }}";

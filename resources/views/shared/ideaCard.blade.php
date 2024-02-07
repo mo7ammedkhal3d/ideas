@@ -1,33 +1,34 @@
 <div class="card">
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center">
-                <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $idea->user->name }}"
-                    alt="{{ $idea->user->name }}">
+            <div class="d-flex align-items-center gap-3">
+                <img src="{{ 'https://www.gravatar.com/avatar/' . md5(strtolower(trim(Auth::user()->email))) . '?d=mp' }}"
+                alt="Profile" class="rounded-circle" style="height:3rem">
                 <div>
-                    <h5 class="card-title mb-0"><a href="#"> {{ $idea->user->name }}
+                    <h5 class="card-title mb-0"><a href="{{route('users.show',$idea->user->id)}}"> {{ $idea->user->name }}
                         </a></h5>
                 </div>
             </div>
             <div class="d-flex gap-2 flex-row align-items-center">
                 @auth
                     @if (Auth::user()->id == $idea->user_id)
-                        <a href="{{ route('idea.edit', $idea->id) }}"><i class="fas fa-edit fs-3 text-info"></i></a>
+                        <a href="{{ route('ideas.edit', $idea->id) }}"><i class="fas fa-edit fs-3 text-info"></i></a>
                     @endif
-                    <a href="{{ route('idea.show', $idea->id) }}"><i class="fas fa-info-circle fs-3 text-success"></i></a>
+                    <a href="{{ route('ideas.show', $idea->id) }}"><i class="fas fa-info-circle fs-3 text-success"></i></a>
+                    @if (Auth::user()->id == $idea->user_id)
+                        <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">X</button>
+                        </form>
+                    @endif
                 @endauth
-                <form action="{{ route('idea.destroy', $idea->id) }}" method="POST">
-                    @method('delete')
-                    @csrf
-                    <button type="submit" class="btn btn-danger btn-sm">X</button>
-                </form>
             </div>
         </div>
     </div>
     <div class="card-body">
         @if ($editing ?? false)
-            <form action="{{ route('idea.update', $idea->id) }}" method="POST">
+            <form action="{{ route('ideas.update', $idea->id) }}" method="POST">
                 @csrf
                 @method('put')
                 <div class="mb-3">

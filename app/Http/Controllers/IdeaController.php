@@ -23,7 +23,7 @@ class IdeaController extends Controller
         Idea::create(['content' => $validated['content'], 'user_id' => auth()->id()]);
 
         return redirect()
-            ->route('idea.index')
+            ->route('ideas.index')
             ->with('success', 'Idea was created successfully');
     }
 
@@ -63,7 +63,7 @@ class IdeaController extends Controller
         $idea->update($validated);
 
         return redirect()
-            ->route('idea.show', $idea->id)
+            ->route('ideas.show', $idea->id)
             ->with('success', 'idea is updeated successfully');
     }
 
@@ -76,7 +76,7 @@ class IdeaController extends Controller
         $idea->delete();
 
         return redirect()
-            ->route('idea.index')
+            ->route('ideas.index')
             ->with('success', 'idea deleted successfully');
     }
 }

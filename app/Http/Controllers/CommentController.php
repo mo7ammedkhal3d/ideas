@@ -20,6 +20,6 @@ class CommentController extends Controller
 
         Comment::create(['content'=>request()->get('comment-text'),'idea_id'=>$idea->id , 'user_id'=>auth()->id()]);
 
-        return redirect()->route('idea.show',$idea->id)->with('success','Comment posted successfully');
+        return redirect()->route('ideas.show',$idea->id)->with('success','Comment posted successfully');
     }
 }

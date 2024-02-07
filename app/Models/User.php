@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password','bio','image'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -38,11 +38,11 @@ class User extends Authenticatable
 
     public function ideas()
     {
-        return $this->hasMany(Idea::class);
+        return $this->hasMany(Idea::class)->latest();
     }
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->latest();
     }
 }

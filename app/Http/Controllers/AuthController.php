@@ -11,12 +11,12 @@ class AuthController extends Controller
 {
     public function register()
     {
-        return view('auth.register',['register'=>true]);
+        return view('auth.register', ['register' => true]);
     }
 
     public function login()
     {
-        return view('auth.login',['login'=>true]);
+        return view('auth.login', ['login' => true]);
     }
 
     public function store()
@@ -48,7 +48,7 @@ class AuthController extends Controller
         ]);
 
         return redirect()
-            ->route('idea.index')
+            ->route('ideas.index')
             ->with('success', 'Account created successfully !!');
     }
 
@@ -71,7 +71,7 @@ class AuthController extends Controller
                 ->session()
                 ->regenerate();
             return redirect()
-                ->route('idea.index')
+                ->route('ideas.index')
                 ->with('success', 'Login successfully!');
         }
 
@@ -92,7 +92,7 @@ class AuthController extends Controller
             ->regenerateToken();
 
         return redirect()
-            ->route('idea.index')
+            ->route('ideas.index')
             ->with('success', 'Logout successfuly!!');
     }
 }

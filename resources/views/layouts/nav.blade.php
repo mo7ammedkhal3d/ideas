@@ -1,7 +1,7 @@
     <nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark ticky-top bg-body-tertiary"
         data-bs-theme="dark">
         <div class="container">
-            <a class="navbar-brand fw-light" href="{{ route('idea.index') }}"><span class="fas fa-brain me-1">
+            <a class="navbar-brand fw-light" href="{{ route('ideas.index') }}"><span class="fas fa-brain me-1">
                 </span>{{ config('app.name') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,7 @@
                                 <div class="d-flex gap-1">
                                     <img src="{{ 'https://www.gravatar.com/avatar/' . md5(strtolower(trim(Auth::user()->email))) . '?d=mp' }}"
                                         alt="Profile" class="rounded-circle" style="height:3rem">
-                                    <a class="nav-link" href="#"> {{ Auth::user()->name }} </a>
+                                    <a class="nav-link" href="{{route('profile')}}" > {{ Auth::user()->name }} </a>
                                 </div>
                                 <div class="d-flex align-items-center justify-contnet-center">
                                     <form action="logout" method="POST">
