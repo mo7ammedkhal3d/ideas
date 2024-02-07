@@ -11,11 +11,11 @@
                 <ul class="navbar-nav">
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link {{ isset($login) ? 'active' : '' }}" aria-current="page"
+                            <a class="nav-link {{ Route::is('login') ? 'active' : '' }}" aria-current="page"
                                 href="{{ route('login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ isset($register) ? 'active' : '' }}"
+                            <a class="nav-link {{ Route::is('register') ? 'active' : '' }}"
                                 href="{{ route('register') }}">Register</a>
                         </li>
                     @endguest
@@ -25,7 +25,8 @@
                                 <div class="d-flex gap-1">
                                     <img src="{{ $user->getImageUrl() }}" alt="Profile" class="rounded-circle"
                                         style="height:3rem">
-                                    <a class="nav-link" href="{{ route('profile') }}"> {{ Auth::user()->name }} </a>
+                                    <a class="nav-link {{ Route::is('profile') ? 'active' : '' }}"
+                                        href="{{ route('profile') }}"> {{ Auth::user()->name }} </a>
                                 </div>
                                 <div class="d-flex align-items-center justify-contnet-center">
                                     <form action="logout" method="POST">

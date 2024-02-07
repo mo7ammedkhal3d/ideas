@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\WelcomeEmail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
 class AuthController extends Controller
 {
     public function register()
     {
-        return view('auth.register', ['register' => true]);
+        return view('auth.register');
     }
 
     public function login()
     {
-        return view('auth.login', ['login' => true]);
+        return view('auth.login');
     }
 
     public function store()
@@ -41,15 +43,19 @@ class AuthController extends Controller
             ],
         );
 
-        User::create([
+        $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()
-            ->route('ideas.index')
-            ->with('success', 'Account created successfully !!');
+        if (auth()->attempt($validated)) {
+            request()->session()->regenerate();
+        }
+
+        // Mail::to($user->email)->send(new WelcomeEmail($user));
+
+        return redirect()->route('ideas.index')->with('success', 'Account created successfully !!');
     }
 
     public function authenticate()
@@ -67,12 +73,8 @@ class AuthController extends Controller
         );
 
         if (auth()->attempt($validated)) {
-            request()
-                ->session()
-                ->regenerate();
-            return redirect()
-                ->route('ideas.index')
-                ->with('success', 'Login successfully!');
+            request()->session()->regenerate();
+            return redirect()->route('ideas.index')->with('success', 'Login successfully!');
         }
 
         return redirect()
@@ -84,15 +86,9 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        request()
-            ->session()
-            ->invalidate();
-        request()
-            ->session()
-            ->regenerateToken();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
 
-        return redirect()
-            ->route('ideas.index')
-            ->with('success', 'Logout successfuly!!');
+        return redirect()->route('ideas.index')->with('success', 'Logout successfuly!!');
     }
 }
