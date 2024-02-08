@@ -6,6 +6,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaLikeController;
+use App\Http\Controllers\admin\dashboardController as AdminDashboardController;
 use App\Http\Controllers\profilecontroller;
 use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
@@ -75,6 +76,8 @@ Route::post('idea/{idea}/like', [IdeaLikeController::class, 'like'])
 Route::post('idea/{idea}/unlike', [IdeaLikeController::class, 'unlike'])
     ->name('idea.unlike')
     ->middleware('auth');
+
+Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth');
 
 Route::get('/feed',FeedController::class)->middleware('auth')->name('feed');
 
