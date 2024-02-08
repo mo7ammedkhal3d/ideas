@@ -29,7 +29,10 @@ class Idea extends Model
         return $this->belongsToMany(User::class, 'idea_like')->withTimestamps();
     }
 
-    public function isLiker(User $user){
-        return $this->likes()->where('user_id',$user->id)->exists();
+    public function isLiker(User $user)
+    {
+        return $this->likes()
+            ->where('user_id', $user->id)
+            ->exists();
     }
 }
