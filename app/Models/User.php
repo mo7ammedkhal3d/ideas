@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
     protected $fillable = ['name', 'email', 'password', 'bio', 'image'];
 
     /**
@@ -65,5 +67,10 @@ class User extends Authenticatable
         } else {
             return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email))) . '?d=mp';
         }
+    }
+
+    public function likes(){
+
+        return $this->belongsToMany(Idea::class,'idea_like')->withTimestamps();
     }
 }

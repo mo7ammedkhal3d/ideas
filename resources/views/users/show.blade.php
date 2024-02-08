@@ -9,15 +9,15 @@
                 @include('shared.successMessage')
                 <div class="mt-3">
                     @if ($editing ?? false)
-                        @include('shared.userEdit')
+                        @include('users.userEdit')
                     @else
-                        @include('shared.userCard')
+                        @include('users.userCard')
                     @endif
                 </div>
                 <hr>
                 @forelse ($ideas as $idea)
                     <div class="mt-3">
-                        @include('shared.ideaCard')
+                        @include('ideas.shared.ideaCard')
                     </div>
                 @empty
                     <h1 class="text-center mb-4">No result found 🥲</h1>

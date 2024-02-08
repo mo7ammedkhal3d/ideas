@@ -10,7 +10,9 @@ class Idea extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['content', 'likes', 'user_id'];
+    protected $with = ['user:id,name,image', 'comments.user:id,name,image'];
+
+    protected $fillable = ['content', 'user_id'];
 
     public function user()
     {
@@ -20,5 +22,14 @@ class Idea extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class)->latest();
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'idea_like')->withTimestamps();
+    }
+
+    public function isLiker(User $user){
+        return $this->likes()->where('user_id',$user->id)->exists();
     }
 }

@@ -13,7 +13,9 @@
             </li>
         </ul>
     </div>
-    <div class="card-footer text-center py-2">
-        <a class="btn btn-link btn-sm" href="{{ route('profile') }}">View Profile </a>
-    </div>
+    @auth
+        <div class="card-footer text-center py-2">
+            <a class="btn btn-link btn-sm" href="{{ route('profile', Auth::id()) }}">View Profile </a>
+        </div>
+    @endauth
 </div>

@@ -26,7 +26,7 @@
                                     <img src="{{ $user->getImageUrl() }}" alt="Profile" class="rounded-circle"
                                         style="height:3rem">
                                     <a class="nav-link {{ Route::is('profile') ? 'active' : '' }}"
-                                        href="{{ route('profile') }}"> {{ Auth::user()->name }} </a>
+                                        href="{{ route('profile',Auth::id()) }}"> {{ Auth::user()->name }} </a>
                                 </div>
                                 <div class="d-flex align-items-center justify-contnet-center">
                                     <form action="logout" method="POST">

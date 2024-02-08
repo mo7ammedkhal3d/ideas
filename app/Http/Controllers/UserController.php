@@ -61,10 +61,9 @@ class UserController extends Controller
         return redirect()->route('profile',$user->id)->with('success','Your profile updated successfuly');
     }
 
-    public function profile(){
+    public function profile(User $user){
 
-
-        return $this->show(auth()->user());
+        return $this->show($user);
     }
 
 

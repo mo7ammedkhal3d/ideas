@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\IdeaLikeController;
 use App\Http\Controllers\profilecontroller;
 use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
@@ -49,15 +49,31 @@ Route::resource('ideas', IdeaController::class)
 
 Route::resource('ideas', IdeaController::class)->only(['show']); // we do this where we need to detrmine show without auth middleware this two lines of code is replaed than the alot of lines in above
 
-Route::resource('ideas.comments',CommentController::class)->only('store')->middleware('auth'); // this line is the replaced of the above line of code for comments
+Route::resource('ideas.comments', CommentController::class)
+    ->only('store')
+    ->middleware('auth'); // this line is the replaced of the above line of code for comments
 
-Route::resource('users',UserController::class)->middleware('auth');
+Route::resource('users', UserController::class)->middleware('auth');
 
-Route::get('profile',[UserController::class, 'profile'])->name('profile')->middleware('auth');
+Route::get('profile/{user}', [UserController::class, 'profile'])
+    ->name('profile')
+    ->middleware('auth');
 
-Route::post('users/{user}/follow',[FollowerController::class,'follow'])->name('users.follow')->middleware('auth');
+Route::post('users/{user}/follow', [FollowerController::class, 'follow'])
+    ->name('users.follow')
+    ->middleware('auth');
 
-Route::post('users/{user}/unfollow',[FollowerController::class,'unfollow'])->name('users.unfollow')->middleware('auth');
+Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])
+    ->name('users.unfollow')
+    ->middleware('auth');
+
+Route::post('idea/{idea}/like', [IdeaLikeController::class, 'like'])
+    ->name('idea.like')
+    ->middleware('auth');
+
+Route::post('idea/{idea}/unlike', [IdeaLikeController::class, 'unlike'])
+    ->name('idea.unlike')
+    ->middleware('auth');
 
 Route::get('/terms', function () {
     return view('terms');

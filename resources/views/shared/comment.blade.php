@@ -16,8 +16,8 @@
         <div class="d-flex align-items-start mb-3 idea-comments gap-2">
             <img src="{{ $comment->user->getImageUrl() }}" alt="Profile" class="rounded-circle" style="height:3rem">
             <div class="w-100">
-                <div class="d-flex justify-content-end">
-                    </a></h5>
+                <div class="d-flex justify-content-between">
+                    <h6><a href="{{ route('profile', $comment->user->id) }}">{{ $comment->user->name }}</a></h6>
                     <small class="fs-6 fw-light text-muted">
                         <script>
                             var postedDate = "{{ $comment->created_at }}";
