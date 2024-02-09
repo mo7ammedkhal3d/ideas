@@ -49,6 +49,7 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
+
         if (auth()->attempt($validated)) {
             request()->session()->regenerate();
         }

@@ -9,7 +9,11 @@
 
     {{-- Links --}}
 
+<<<<<<< HEAD
+    <link href="https://bootswatch.com/5/litera/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+=======
     <link href="https://bootswatch.com/5/spacelab/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+>>>>>>> 972154434dbe7c10b7e90918656fb1953e481a7b
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
