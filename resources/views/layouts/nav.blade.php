@@ -20,13 +20,20 @@
                         </li>
                     @endguest
                     @auth
+                        @if (Auth::user()->is_admin)
+                            <li class="nav-item mx-4">
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">Admin
+                                    Dashboard</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <div class="d-flex gap-2">
                                 <div class="d-flex gap-1">
                                     <img src="{{ $user->getImageUrl() }}" alt="Profile" class="rounded-circle"
                                         style="height:3rem">
                                     <a class="nav-link {{ Route::is('profile') ? 'active' : '' }}"
-                                        href="{{ route('profile',Auth::id()) }}"> {{ Auth::user()->name }} </a>
+                                        href="{{ route('profile', Auth::id()) }}"> {{ Auth::user()->name }} </a>
                                 </div>
                                 <div class="d-flex align-items-center justify-contnet-center">
                                     <form action="logout" method="POST">

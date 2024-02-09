@@ -77,7 +77,7 @@ Route::post('idea/{idea}/unlike', [IdeaLikeController::class, 'unlike'])
     ->middleware('auth');
 
 
-Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware('auth');
+Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth','admin']);
 
 Route::get('/terms', function () {
     return view('terms');

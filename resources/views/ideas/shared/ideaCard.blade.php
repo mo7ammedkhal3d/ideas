@@ -12,9 +12,9 @@
             <div class="d-flex gap-2 flex-row align-items-center">
                 @auth
                     @if (Auth::user()->id == $idea->user_id)
-                        <a href="{{ route('ideas.edit', $idea->id) }}"><i class="fas fa-edit fs-3 text-info"></i></a>
+                        <a href="{{ route('ideas.edit', $idea->id) }}"><i class="fas fa-edit fs-4 text-info"></i></a>
                     @endif
-                    <a href="{{ route('ideas.show', $idea->id) }}"><i class="fas fa-info-circle fs-3 text-success"></i></a>
+                    <a href="{{ route('ideas.show', $idea->id) }}"><i class="fas fa-info-circle fs-4 text-success"></i></a>
                     @if (Auth::user()->id == $idea->user_id)
                         <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
                             @method('delete')
