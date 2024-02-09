@@ -50,11 +50,7 @@
             @include('ideas.shared.likeButton')
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
-                    <script>
-                        var postedDate = "{{ $idea->created_at }}";
-                        var adjustedDate = moment(postedDate).add(3, 'hours');
-                        document.write(adjustedDate.fromNow());
-                    </script>
+                   {{ $idea->created_at->diffForHumans()}}
                 </span>
             </div>
         </div>

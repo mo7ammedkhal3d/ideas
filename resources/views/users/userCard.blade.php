@@ -4,9 +4,9 @@
             <div class="d-flex align-items-center gap-4">
                 <img src="{{ $user->getImageUrl() }}" alt="Profile" class="rounded-circle" style="height:3rem">
                 <div>
-                    <h3 class="card-title mb-0"><a href="#"> {{ $user->name }}
-                        </a></h3>
-                    <span class="fs-6 text-muted">@mario</span>
+                    <h4 class="card-title mb-0"><a href="#"> {{ $user->name }}
+                        </a></h4>
+                    <span class="fs-6 text-muted">{{$user->email}}</span>
                 </div>
             </div>
             @auth
@@ -22,14 +22,7 @@
             <p class="fs-6 fw-light">
                 {{ $user->bio }}
             </p>
-            <div class="d-flex justify-content-start">
-                <a href="#" class="fw-light nav-link fs-6 me-3"> <span class="fas fa-user me-1">
-                    </span> {{$user->followers()->count()}} Followers </a>
-                <a href="#" class="fw-light nav-link fs-6 me-3"> <span class="fas fa-brain me-1">
-                    </span> {{ $user->ideas->count() }} </a>
-                <a href="#" class="fw-light nav-link fs-6"> <span class="fas fa-comment me-1">
-                    </span> {{ $user->comments->count() }} </a>
-            </div>
+            @include('users.userStats')
             @auth
                 @if ($user->id !== Auth::id())
                     <div class="mt-3">

@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $ideas = $user->ideas()->paginate(5);
 
-        return view('users.show',compact('user','ideas'));
+        return view('users.show', compact('user', 'ideas'));
     }
 
     /**
@@ -24,10 +24,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $editing =true;
+        $editing = true;
         $ideas = $user->ideas()->paginate(5);
 
-        return view('users.show',compact('user','editing','ideas'));
+        return view('users.show', compact('user', 'editing', 'ideas'));
     }
 
     /**
@@ -35,12 +35,11 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
-
         $validated = request()->validate(
             [
                 'name' => 'required|min:5|max:50',
-                'bio'=>'nullable|min:1|max:255',
-                'image'=>'image'
+                'bio' => 'nullable|min:1|max:255',
+                'image' => 'image',
             ],
             [
                 'name.required' => 'please enter your name here 😊',
@@ -49,8 +48,8 @@ class UserController extends Controller
             ],
         );
 
-        if(request()->has('image')){
-            $imagePath = request()->file(('image'))->store('profile','public');
+        if (request()->has('image')) {
+            $imagePath = request()->file('image')->store('profile', 'public');
             $validated['image'] = $imagePath;
 
             Storage::disk('public')->delete($user->image ?? '');
@@ -58,13 +57,13 @@ class UserController extends Controller
 
         $user->update($validated);
 
-        return redirect()->route('profile',$user->id)->with('success','Your profile updated successfuly');
+        return redirect()
+            ->route('profile', $user->id)
+            ->with('success', 'Your profile updated successfuly');
     }
 
-    public function profile(User $user){
-
+    public function profile(User $user)
+    {
         return $this->show($user);
     }
-
-
 }

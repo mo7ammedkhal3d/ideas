@@ -18,8 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
+<<<<<<< HEAD
 
     protected $fillable = ['name', 'email', 'password', 'bio', 'image','is_admin'];
+=======
+    protected $fillable = ['name', 'email', 'password', 'bio', 'image'];
+>>>>>>> 972154434dbe7c10b7e90918656fb1953e481a7b
 
     /**
      * The attributes that should be hidden for serialization.
@@ -48,16 +52,21 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class)->latest();
     }
 
-    public function followings(){
-        return $this->belongsToMany(User::class,'follower_user','follower_id','user_id')->withTimestamps();
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'follower_user', 'follower_id', 'user_id')->withTimestamps();
     }
 
-    public function followers(){
-        return $this->belongsToMany(User::class,'follower_user','user_id','follower_id')->withTimestamps();
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id')->withTimestamps();
     }
 
-    public function follows(User $user){
-         return $this->followings()->where('user_id',$user->id)->exists();
+    public function follows(User $user)
+    {
+        return $this->followings()
+            ->where('user_id', $user->id)
+            ->exists();
     }
 
     public function getImageUrl()
@@ -69,8 +78,18 @@ class User extends Authenticatable
         }
     }
 
-    public function likes(){
+    public function likesCount()
+    {
+        $likesNo = 0;
+        foreach ($this->ideas as $idea) {
+            $likesNo += $idea->likes()->count();
+        }
 
-        return $this->belongsToMany(Idea::class,'idea_like')->withTimestamps();
+        return $likesNo;
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Idea::class, 'idea_like')->withTimestamps();
     }
 }
