@@ -11,17 +11,17 @@
             </div>
             <div class="d-flex gap-2 flex-row align-items-center">
                 @auth
-                    @if (Auth::user()->id == $idea->user_id)
+                    @can('idea.edit', $idea)
                         <a href="{{ route('ideas.edit', $idea->id) }}"><i class="fas fa-edit fs-4 text-info"></i></a>
-                    @endif
+                    @endcan
                     <a href="{{ route('ideas.show', $idea->id) }}"><i class="fas fa-info-circle fs-4 text-success"></i></a>
-                    @if (Auth::user()->id == $idea->user_id)
+                    @can('idea.delete',$idea)
                         <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
                             @method('delete')
                             @csrf
                             <button type="submit" class="btn btn-danger btn-sm">X</button>
                         </form>
-                    @endif
+                    @endcan
                 @endauth
             </div>
         </div>
@@ -50,7 +50,7 @@
             @include('ideas.shared.likeButton')
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
-                   {{ $idea->created_at->diffForHumans()}}
+                    {{ $idea->created_at->diffForHumans() }}
                 </span>
             </div>
         </div>

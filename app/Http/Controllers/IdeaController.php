@@ -34,9 +34,11 @@ class IdeaController extends Controller
 
     public function edit(Idea $idea)
     {
-        if (auth()->id() !== $idea->user_id) {
-            abort(404);
-        }
+        // if (auth()->id() !== $idea->user_id) {
+        //     abort(404);
+        // }
+
+        $this->authorize('idea.edit',$idea);
 
         $editing = true;
 
@@ -45,9 +47,11 @@ class IdeaController extends Controller
 
     public function update(idea $idea)
     {
-        if (auth()->id() !== $idea->user_id) {
-            abort(404);
-        }
+        // if (auth()->id() !== $idea->user_id) {
+        //     abort(404);
+        // }
+
+        $this->authorize('idea.edit',$idea);
 
         $validated = request()->validate(
             [
@@ -69,10 +73,13 @@ class IdeaController extends Controller
 
     public function destroy(idea $idea)
     {
-        if (auth()->id() !== $idea->user_id) {
-            abort(404);
-        }
+        // if (auth()->id() !== $idea->user_id) {
+        //     abort(404);
+        // }
         // idea::where('id',$idae_id)->firstOrFail()->delete();
+
+        $this->authorize('idea.delete',$idea);
+
         $idea->delete();
 
         return redirect()
