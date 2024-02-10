@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\Idea;
 use App\Models\User;
+use App\Policies\IdeaPermissions;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -16,8 +17,8 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array<class-string, class-string>
      */
-    protected $policies = [
-        //
+    protected $policies = [  // here we use mapping if we have differnebt name form model + Policy
+        Idea::class => IdeaPermissions::class // thene here we shoud define policy map here
     ];
 
     /**
