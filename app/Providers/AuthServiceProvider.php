@@ -34,14 +34,14 @@ class AuthServiceProvider extends ServiceProvider
             return (bool) $user->is_admin;
         });
 
-        // permission
+        // permission  Here we are using polices inested Gate it more orgized and more manange for a lot of models
 
-        Gate::define('idea.delete' , function(User $user , Idea $idea){
-            return  (Gate::allows('admin') || $user->id === $idea->user_id);
-        });
+        // Gate::define('idea.delete' , function(User $user , Idea $idea){
+        //     return  (Gate::allows('admin') || $user->id === $idea->user_id);
+        // });
 
-        Gate::define('idea.edit' , function(User $user, Idea $idea):bool{
-            return (Gate::allows('admin') || $user->id === $idea->user_id);
-        });
+        // Gate::define('idea.edit' , function(User $user, Idea $idea):bool{
+        //     return (Gate::allows('admin') || $user->id === $idea->user_id);
+        // });
     }
 }

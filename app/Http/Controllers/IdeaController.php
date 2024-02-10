@@ -38,7 +38,7 @@ class IdeaController extends Controller
         //     abort(404);
         // }
 
-        $this->authorize('idea.edit',$idea);
+        $this->authorize('update',$idea);
 
         $editing = true;
 
@@ -51,7 +51,7 @@ class IdeaController extends Controller
         //     abort(404);
         // }
 
-        $this->authorize('idea.edit',$idea);
+        $this->authorize('update',$idea);
 
         $validated = request()->validate(
             [
@@ -78,7 +78,7 @@ class IdeaController extends Controller
         // }
         // idea::where('id',$idae_id)->firstOrFail()->delete();
 
-        $this->authorize('idea.delete',$idea);
+        $this->authorize('delete',$idea);
 
         $idea->delete();
 

@@ -11,11 +11,11 @@
             </div>
             <div class="d-flex gap-2 flex-row align-items-center">
                 @auth
-                    @can('idea.edit', $idea)
+                    @can('update', $idea)
                         <a href="{{ route('ideas.edit', $idea->id) }}"><i class="fas fa-edit fs-4 text-info"></i></a>
                     @endcan
                     <a href="{{ route('ideas.show', $idea->id) }}"><i class="fas fa-info-circle fs-4 text-success"></i></a>
-                    @can('idea.delete',$idea)
+                    @can('delete',$idea)
                         <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST">
                             @method('delete')
                             @csrf
