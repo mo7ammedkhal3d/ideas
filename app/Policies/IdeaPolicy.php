@@ -6,14 +6,14 @@ use App\Models\Idea;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class IdeaPermissions
+class IdeaPolicy
 {
     /**
      * Determine whether the user can update the model.
      */
     public function update(User $user, Idea $idea): bool
     {
-        return ($user->is_admin || $user->id === $idea->user_id);
+        return ($user->is_admin || $user->is($idea->user));
     }
 
     /**
@@ -21,7 +21,7 @@ class IdeaPermissions
      */
     public function delete(User $user, Idea $idea): bool
     {
-        return ($user->is_admin || $user->id === $idea->user_id);
+        return ($user->is_admin || $user->is($idea->user));
     }
 
 }

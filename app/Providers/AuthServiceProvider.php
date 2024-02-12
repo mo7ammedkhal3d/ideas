@@ -18,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [  // here we use mapping if we have differnebt name form model + Policy
-        Idea::class => IdeaPermissions::class // thene here we shoud define policy map here
+        // Idea::class => IdeaPermissions::class // thene here we shoud define policy map here
     ];
 
     /**

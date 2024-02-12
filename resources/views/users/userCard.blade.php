@@ -10,11 +10,11 @@
                 </div>
             </div>
             @auth
-                @if ($user->id === Auth::id())
+                @can('update',$user)
                     <div>
                         <a href="{{ route('users.edit', $user->id) }}"><i class="fas fa-edit fs-4 text-info"></i></a>
                     </div>
-                @endif
+                @endcan
             @endauth
         </div>
         <div class="px-2 mt-4">

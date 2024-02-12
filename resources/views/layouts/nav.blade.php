@@ -36,7 +36,7 @@
                                         href="{{ route('profile', Auth::id()) }}"> {{ Auth::user()->name }} </a>
                                 </div>
                                 <div class="d-flex align-items-center justify-contnet-center">
-                                    <form action="logout" method="POST">
+                                    <form action="{{route('logout')}}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-outline-info"
                                             href="{{ route('logout') }}">Logout</button>
