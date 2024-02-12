@@ -2,23 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateIdeaRequest;
+use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 
 class IdeaController extends Controller
 {
-    public function store()
+    public function store(CreateIdeaRequest $request)
     {
-        $validated = request()->validate(
-            [
-                'content' => 'required|min:8|max:240',
-            ],
-            [
-                'content.required' => 'You are missing to enter an idea to post! 😒',
-                'content.min' => 'The idea must contain at least 8 characters! 😊🥸',
-                'content.max' => 'The idea text is too long! 😐 Please enter fewer characters.',
-            ],
-        );
+        $validated = $request->validated();
 
         Idea::create(['content' => $validated['content'], 'user_id' => auth()->id()]);
 
@@ -45,7 +38,7 @@ class IdeaController extends Controller
         return view('ideas.show', compact('editing', 'idea'));
     }
 
-    public function update(idea $idea)
+    public function update(UpdateIdeaRequest $request ,idea $idea)
     {
         // if (auth()->id() !== $idea->user_id) {
         //     abort(404);
@@ -53,18 +46,7 @@ class IdeaController extends Controller
 
         $this->authorize('update',$idea);
 
-        $validated = request()->validate(
-            [
-                'content' => 'required|min:8|max:240',
-            ],
-            [
-                'content.required' => 'You missing enter idea to post ?!!! 😒',
-                'content.min' => 'The idea at leat must contain 8 charachters 😊🥸',
-                'content.max' => 'The idea text is too long 😐 please enter less charachetrs',
-            ],
-        );
-
-        $idea->update($validated);
+        $idea->update($request->validated());
 
         return redirect()
             ->route('ideas.show', $idea->id)

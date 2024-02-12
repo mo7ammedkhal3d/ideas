@@ -6,16 +6,14 @@
                 <div>
                     <h4 class="card-title mb-0"><a href="#"> {{ $user->name }}
                         </a></h4>
-                    <span class="fs-6 text-muted">{{$user->email}}</span>
+                    <span class="fs-6 text-muted">{{ $user->email }}</span>
                 </div>
             </div>
-            @auth
-                @can('update',$user)
-                    <div>
-                        <a href="{{ route('users.edit', $user->id) }}"><i class="fas fa-edit fs-4 text-info"></i></a>
-                    </div>
-                @endcan
-            @endauth
+            @can('update', $user)
+                <div>
+                    <a href="{{ route('users.edit', $user->id) }}"><i class="fas fa-edit fs-4 text-info"></i></a>
+                </div>
+            @endcan
         </div>
         <div class="px-2 mt-4">
             <h5 class="fs-5"> About : </h5>
@@ -24,7 +22,7 @@
             </p>
             @include('users.userStats')
             @auth
-                @if ($user->id !== Auth::id())
+                @if (Auth::user()->isNot($user))
                     <div class="mt-3">
                         @if (Auth::user()->follows($user))
                             <form action="{{ route('users.unfollow', $user->id) }}" method="POST">
