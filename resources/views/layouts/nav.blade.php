@@ -3,6 +3,8 @@
         <div class="container">
             <a class="navbar-brand fw-light" href="{{ route('ideas.index') }}"><span class="fas fa-brain me-1">
                 </span>{{ config('app.name') }}</a>
+            <a class="btn nav-item btn-sm" href="{{ route('setLang', ['lang' => 'en']) }}">En</a>
+            <a class="btn nav-item btn-sm" href="{{ route('setLang', ['lang' => 'ar']) }}">Ar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,7 +38,7 @@
                                         href="{{ route('profile', Auth::id()) }}"> {{ Auth::user()->name }} </a>
                                 </div>
                                 <div class="d-flex align-items-center justify-contnet-center">
-                                    <form action="{{route('logout')}}" method="POST">
+                                    <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-outline-info"
                                             href="{{ route('logout') }}">Logout</button>
