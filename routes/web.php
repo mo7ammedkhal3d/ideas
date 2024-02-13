@@ -23,6 +23,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('lang/{lang}', function($lang){
+    app()->setLocale($lang);
+    session()->put('locale',$lang);
+
+    return redirect()->route('ideas.index');
+})->name('setLang');
+
 Route::get('/', [dashboardController::class, 'index'])->name('ideas.index');
 
 Route::group(['prefix' => 'ideas/', 'as' => 'ideas.', 'middleware' => 'auth'], function () {
