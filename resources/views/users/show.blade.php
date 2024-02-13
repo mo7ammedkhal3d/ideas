@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Profile')
+@section('title', $user->name)
 @section('content')
     <div class="container py-4">
         <div class="row">
