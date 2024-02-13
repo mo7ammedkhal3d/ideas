@@ -25,19 +25,17 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
 
-        $this->authorize('update',$user);
-
-        $editing = true;
         $ideas = $user->ideas()->paginate(5);
 
-        return view('users.show', compact('user', 'editing', 'ideas'));
+        return view('users.edit', compact('user', 'ideas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request , User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         $validated = $request->validated();
 

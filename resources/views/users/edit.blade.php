@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Profile')
+@section('title', 'Edit Profile')
 @section('content')
     <div class="container py-4">
         <div class="row">
@@ -9,7 +9,7 @@
             <div class="col-6">
                 @include('shared.successMessage')
                 <div class="mt-3">
-                    @include('users.shared.userCard')
+                    @include('users.shared.editUserCard')
                 </div>
                 <hr>
                 @forelse ($ideas as $idea)

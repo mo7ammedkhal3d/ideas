@@ -45,7 +45,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm">Save</button>
                 </p>
-                @include('users.userStats')
+                @include('users.shared.userStats')
             </div>
         </form>
     </div>
