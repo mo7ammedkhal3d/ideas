@@ -20,7 +20,7 @@
             <p class="fs-6 fw-light">
                 {{ $user->bio }}
             </p>
-            @include('users.userStats')
+            @include('users.shared.userStats')
             @auth
                 @if (Auth::user()->isNot($user))
                     <div class="mt-3">
