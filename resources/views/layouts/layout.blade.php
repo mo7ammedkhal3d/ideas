@@ -10,7 +10,7 @@
     {{-- Links --}}
 
     <link href="https://bootswatch.com/5/spacelab/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://kit.fontawesome.com/16f6ba35a2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 

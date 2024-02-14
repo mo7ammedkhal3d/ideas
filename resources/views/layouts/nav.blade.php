@@ -3,8 +3,8 @@
         <div class="container">
             <a class="navbar-brand fw-light" href="{{ route('ideas.index') }}"><span class="fas fa-brain me-1">
                 </span>{{ config('app.name') }}</a>
-            <a class="btn nav-item btn-sm" href="{{ route('setLang', ['lang' => 'en']) }}">En</a>
-            <a class="btn nav-item btn-sm" href="{{ route('setLang', ['lang' => 'ar']) }}">Ar</a>
+            <a class="btn nav-item btn-sm" href="{{ route('setLang','en') }}">En</a>
+            <a class="btn nav-item btn-sm" href="{{ route('setLang','ar') }}">Ar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
