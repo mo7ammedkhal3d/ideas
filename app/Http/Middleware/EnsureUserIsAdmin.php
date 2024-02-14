@@ -13,7 +13,7 @@ class EnsureUserIsAdmin
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
+     */  #mk
     public function handle(Request $request, Closure $next): Response
     {
 
