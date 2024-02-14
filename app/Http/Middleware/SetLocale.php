@@ -4,23 +4,21 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureUserIsAdmin
+class SetLocale
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */  #mk
+     */
     public function handle(Request $request, Closure $next): Response
     {
-        #mohammed
-        if(!auth()->user()->is_admin){
-            abort(403);
+        if(session()->has('locale')){
+            app()->setLocale(session()->get('locale'));     
         }
 
-        return $next(request());
+        return $next($request);
     }
 }
