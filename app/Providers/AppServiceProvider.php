@@ -34,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('user', auth()->user());
         });
 
+        View::share('topUsers', User::withCount('ideas')->orderby('ideas_count', 'DESC')->limit(5)->get());
+
         // App::setLocale('ar');
     }
 }
