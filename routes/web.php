@@ -23,9 +23,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('lang/{lang}', function($lang){
+Route::get('lang/{lang}', function ($lang) {
     app()->setLocale($lang);
-    session()->put('locale',$lang);
+    session()->put('locale', $lang);
 
     return redirect()->route('ideas.index');
 })->name('setLang');
@@ -86,9 +86,13 @@ Route::post('idea/{idea}/unlike', [IdeaLikeController::class, 'unlike'])
 
 // Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth','admin']);
 
-Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth','can:admin']);
+Route::get('/admin', [AdminDashboardController::class, 'index'])
+    ->name('admin.dashboard')
+    ->middleware(['auth', 'can:admin']);
 
-Route::get('/feed',FeedController::class)->middleware('auth')->name('feed');
+Route::get('/feed', FeedController::class)
+    ->middleware('auth')
+    ->name('feed');
 
 Route::get('/terms', function () {
     return view('terms');

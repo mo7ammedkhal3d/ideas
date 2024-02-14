@@ -6,15 +6,13 @@
         @foreach ($topUsers as $user)
             <div class="hstack gap-2 mb-3">
                 <div class="avatar">
-                    <a href="{{route('profile',$user->id)}}"><img class="rounded-circle" style="height:2rem" src="{{ $user->getImageUrl() }}"
-                            alt=""></a>
+                    <a href="{{ route('profile', $user->id) }}"><img class="rounded-circle" style="height:2rem"
+                            src="{{ $user->getImageUrl() }}" alt=""></a>
                 </div>
                 <div class="overflow-hidden">
-                    <a class="h6 mb-0" href="{{route('profile',$user->id)}}">{{ $user->name }}</a>
-                    <p class="mb-0 small text-truncate">{{$user->email}}</p>
+                    <a class="h6 mb-0" href="{{ route('profile', $user->id) }}">{{ $user->name }}</a>
+                    <p class="mb-0 small text-truncate">{{ $user->email }}</p>
                 </div>
-                <a class="btn btn-primary-soft rounded-circle icon-md ms-auto"
-                    href="{{ route('users.follow', $user->id) }}"><i class="fa-solid fa-plus"></i></a>
             </div>
         @endforeach
     </div>

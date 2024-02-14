@@ -10,13 +10,15 @@ class dashboardController extends Controller
 {
     public function index()
     {
-        $ideas = idea::latest();
+        // $ideas = idea::latest();
 
-        if (request()->has('search')) {
-            $ideas = $ideas->where('content', 'like', '%' . request()->get('search', '') . '%');
-        }
+        // if (request()->has('search')) {
+        //     $ideas = $ideas->search(request('search',''));
+        // }
 
-        $ideas = $ideas->paginate(5);
+        $ideas= Idea::when(request()->has('search'),function($query){
+            $query->search(request('search',''));
+        })->latest()->paginate(5);
 
         return view('dashboard', compact('ideas'));
     }
