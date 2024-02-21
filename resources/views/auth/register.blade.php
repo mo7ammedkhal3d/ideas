@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-sm-8 col-md-6">
-                <form class="form mt-5" action="{{ route('register') }}" method="POST">
+            <div class="d-flex justify-content-between flex-wrap col-8 col-sm-8 col-md-10">
+                <form class="form mt-5 w-md-50 w-100" action="{{ route('register') }}" method="POST">
                     @csrf
                     <h3 class="text-center text-dark">Register</h3>
                     <div class="form-group">
@@ -43,6 +43,14 @@
                         <a href="{{ route('login') }}" class="text-dark btn-outline-info">Login here</a>
                     </div>
                 </form>
+
+                <div class="my-5 d-flex justify-conetnt-center flex-column align-items-center">
+                    <h4 class="mb-4">Or you can login via </h4>
+                    <a href="#" class="border">
+                        <img src="{{asset('assets/img/goole-icon.png')}}" height="50px" alt="">
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
