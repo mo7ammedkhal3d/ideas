@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\WelcomeEmail;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
 class AuthController extends Controller
@@ -91,5 +93,76 @@ class AuthController extends Controller
         request()->session()->regenerateToken();
 
         return redirect()->route('ideas.index')->with('success', 'Logout successfuly!!');
+    }
+
+    public function redirectToGoogle(){
+       return Socialite::driver('google')->redirect();
+    }
+
+    public function redirectToFacebook(){
+        return Socialite::driver('facebook')->redirect();
+     }
+
+     public function handelGoogleCallback() {
+        try {
+            $user = Socialite::driver('google')->user();
+
+            $findUser = User::where('social_id', $user->id)->first();
+
+            if ($findUser) {
+                if (auth()->attempt(['email' => $findUser->email, 'password' => 'my-google'])) {
+                    request()->session()->regenerate();
+                    return redirect()->route('ideas.index')->with('success', 'Login successfully!');
+                }
+            } else {
+                $newUser = User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'social_id' => $user->id,
+                    'social_type' => 'google',
+                    'image' => $user->avatar, // Save avatar URL to your database
+                    'password' => Hash::make('my-google'),
+                ]);
+
+                if (auth()->attempt(['email' => $newUser->email, 'password' => 'my-google'])) {
+                    request()->session()->regenerate();
+                    return redirect()->route('ideas.index')->with('success', 'Login successfully!');
+                }
+            }
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+
+    public function handelFacebookCallback(){
+        try {
+            $user = Socialite::driver('facebook')->user();
+
+            $findUser = User::where('social_id',$user->id)->first();
+
+            if($findUser){
+                if (auth()->attempt($findUser)) {
+                    request()->session()->regenerate();
+                    return redirect()->route('ideas.index')->with('success', 'Login successfully!');
+                }
+            }else {
+                $newUser = User::create([
+                    'name' =>$user->name,
+                    'email'=>$user->email,
+                    'social_id'=>$user->id,
+                    'social_type'=>'facebook',
+                    'password'=>Hash::make('my-facebook'),
+                ]);
+
+                if (auth()->attempt($newUser)) {
+                    request()->session()->regenerate();
+                    return redirect()->route('ideas.index')->with('success', 'Login successfully!');
+                }
+            }
+
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
 }
