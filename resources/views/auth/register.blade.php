@@ -47,8 +47,8 @@
                 </div>
                 <div class="col-12 col-md-5 ">
                     <div class="my-5 d-flex justify-conetnt-center flex-column align-items-start">
-                        <h4 class="mb-4 fw-bold">Or you can login via </h4>
-                        <a href="#" class="border">
+                        <h4 class="mb-4 fw-bold">Or you can Sinin via </h4>
+                        <a href="{{route('authViaGoogle')}}" class="border">
                             <img src="{{ asset('assets/img/goole-icon.png') }}" height="50px" alt="">
                         </a>
                     </div>
