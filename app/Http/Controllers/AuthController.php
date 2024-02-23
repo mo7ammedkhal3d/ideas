@@ -120,7 +120,7 @@ class AuthController extends Controller
                     'email' => $user->email,
                     'social_id' => $user->id,
                     'social_type' => 'google',
-                    'image' => $user->avatar, // Save avatar URL to your database
+                    'image' => $user->avatar,
                     'password' => Hash::make('my-google'),
                 ]);
 
