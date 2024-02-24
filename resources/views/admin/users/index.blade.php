@@ -8,11 +8,7 @@
                 @include('admin.shared.sideLinkes')
             </div>
             <div class="col-9">
-                @if (Route::is())
-                    <h1>Users</h1>
-                @else
-                <h1>Admin</h1>
-                @endif
+                <h1>Users admin </h1>
             </div>
         </div>
     </div>
