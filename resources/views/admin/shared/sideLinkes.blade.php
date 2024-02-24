@@ -6,6 +6,11 @@
                     href="{{ route('admin.dashboard') }}">
                     <span>Dashboard</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Route::is('admin.users') ? 'text-white bg-primary rounded' : '' }} "
+                    href="{{ route('admin.users') }}">
+                    <span>Users</span></a>
+            </li>
         </ul>
     </div>
     @auth
