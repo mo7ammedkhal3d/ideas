@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
@@ -29,7 +29,7 @@ Route::get('lang/{lang}', function ($lang) {
     return redirect()->route('ideas.index');
 })->name('setLang');
 
-Route::get('/', [dashboardController::class, 'index'])->name('ideas.index');
+Route::get('/', [DashboardController::class, 'index'])->name('ideas.index');
 
 Route::group(['prefix' => 'ideas/', 'as' => 'ideas.', 'middleware' => 'auth'], function () {
     //     Route::get('{idea}', [IdeaController::class, 'show'])

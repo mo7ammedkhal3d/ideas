@@ -6,7 +6,7 @@ use App\Models\Idea;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class dashboardController extends Controller
+class DashboardController extends Controller
 {
     public function index()
     {
