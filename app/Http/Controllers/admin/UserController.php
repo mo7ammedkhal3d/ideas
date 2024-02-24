@@ -4,13 +4,10 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Log;
 
-class dashboardController extends Controller
+class Usercontroller extends Controller
 {
     public function index(){
-        return view('admin.dashboard');
+        return redirect()->route('admin.users.index');
     }
-
 }
