@@ -34,9 +34,9 @@
                                         @csrf
                                         <button type="submit"><i class="fas fa-edit fs-4 text-info"></button>
                                     </form>
-                                    <a href="{{ route('admin.users.show') }}"><i
+                                    <a href="{{ route('admin.users.show',$user) }}"><i
                                             class="fas fa-info-circle fs-4 text-success"></a>
-                                    <form action="{{ route('admin.users.delete') }}" method="POST">
+                                    <form action="{{ route('admin.users.delete',$user) }}" method="POST">
                                         @csrf
                                         <button class="btn btn-danger" type="submit">x</button>
                                     </form>
