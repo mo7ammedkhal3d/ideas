@@ -8,5 +8,5 @@ Route::middleware(['auth','can:admin'])->prefix('/admin')->as('admin.')->group(f
     Route::get('/', [AdminDashboardController::class, 'index'])
     ->name('dashboard');
 
-    Route::get('/users',[AdminUserController::class,'index'])->name('users');
+    Route::resource('users', AdminUsercontroller::class);
 });
