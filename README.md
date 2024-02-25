@@ -54,8 +54,3 @@ Contributing
 We welcome contributions from everyone! Feel free to open issues or submit pull requests to help improve our Idea Sharing Platform.
 
 Join us on our mission to cultivate a culture of creativity, collaboration, and boundless exploration. Together, let's turn ideas into reality! 🌈✨
-
-javascript
-Copy code
-
-This markdown file provides a structured overview of your project and guides users through
