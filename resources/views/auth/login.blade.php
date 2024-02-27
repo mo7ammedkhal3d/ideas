@@ -29,6 +29,20 @@
                         <a href="{{ route('register') }}" class="text-dark btn-outline-info">Register here</a>
                     </div>
                 </form>
+                <div class="col-12 col-md-5 ">
+                    <div class="my-5 d-flex justify-conetnt-center flex-column align-items-start gap-3">
+                        <h4 class="mb-4 fw-bold">Or you can Sinin via </h4>
+                        <a href="{{ route('authViaGoogle') }}">
+                            <img src="{{ asset('assets/img/goole-icon.png') }}" height="50px" alt="">
+                        </a>
+                        <a href="{{ route('authViaGoogle') }}">
+                            <img src="{{ asset('assets/img/twitter_5968958.png') }}" height="50px" alt="">
+                        </a>
+                        <a href="{{ route('authViaGoogle') }}">
+                            <img src="{{ asset('assets/img/linkedin_145807.png') }}" height="50px" alt="">
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
