@@ -14,6 +14,7 @@ To install and run this project locally, follow these steps:
 
 1. Clone this repository to your local machine:
 
+#Developer : -> mohammed khaled 
    ```bash
    git clone https://github.com/mo7ammedkhal3d/Ideas.git
 Navigate into the project directory:
